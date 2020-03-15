@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+    <div id="pageContent"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('nav a').click(function(e){
+                e.preventDefault();
+                $('nav a').removeClass('active');
+                $(this).addClass('active');
+                $("#pageContent").load($(this).attr('href'));
+            });
+        });
+
+
+
+        $('#pageContent').on('submit', 'form', function (e) {
+            e.preventDefault();
+            var form = $(this);
+
+
+            $.ajax({
+                type: "POST",
+                url: form.attr('action'),
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+
+
+                success: function success(response) {
+                    $("#pageContent").load($('.active').attr('href'));
+                    alert("Create Complete");
+                }
+            });
+        });
+
+        $('#pageContent').on('click','a', function (e) {
+            e.preventDefault();
+            console.log('dans click a');
+            $("#pageContent").load($(this).attr('href'));
+        });
+
+
+    </script>
+{% endblock %}

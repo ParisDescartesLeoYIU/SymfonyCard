@@ -1,0 +1,7 @@
+<h1>Add a Faction</h1>
+{{ form_start(form, {'action': path(app.request.attributes.get('_route')), 'method': 'POST'}) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-lg btn-primary" type="submit">
+        Add Faction
+    </button>
+{{ form_end(form) }}

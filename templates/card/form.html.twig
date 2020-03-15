@@ -1,0 +1,8 @@
+
+    <h1>Add a card</h1>
+    {{ form_start(form, {'action': path(app.request.attributes.get('_route')), 'method': 'POST', 'enctype':'multipart/form-data'}) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-lg btn-primary" type="submit">
+        Add Card
+    </button>
+    {{ form_end(form) }}

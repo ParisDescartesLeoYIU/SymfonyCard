@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+       {% endblock %}
+    </head>
+
+    <body>
+
+    {#    ajout des navbar de Bootswatch#}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+
+        <div class="collapse navbar-collapse" id="navbarColor02">
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="{{ path('add_card') }}" class="navbar-brand">Add Card</a>
+                    <a href="{{ path('add_faction') }}" class="navbar-brand">Add Faction</a>
+                    <a href="{{ path('card') }}" class="navbar-brand">Show Card</a>
+                    <a href="{{ path('faction') }}" class="navbar-brand">Show Faction</a>
+                    <a href="{{ path('create_deck') }}" class="navbar-brand">Create Deck</a>
+                    <a href="{{ path('deck') }}" class="navbar-brand">Show Decks</a>
+
+
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <div style="float: right">  <a href="{{ path('app_logout') }}">Logout</a></div>
+    {% else  %}
+        <div style="float: right">
+            <a href="{{ path('app_login') }}">Sign in</a>
+            <a href="{{ path('app_register') }}">Sign up</a>
+        </div>
+    {% endif %}
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
+    {% block javascripts %}
+
+    {% endblock %}
+
+    </body>
+</html>

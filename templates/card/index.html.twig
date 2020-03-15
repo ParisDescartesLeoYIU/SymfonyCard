@@ -1,0 +1,34 @@
+<h1>Cartes</h1>
+<div class="containerCard">
+    {% for card in cards %}
+
+        {% if card.rarity == "legendary"  %}
+            <div  class="card" id="legendary">
+
+        {% elseif card.rarity == "gold"  %}
+
+            <div class="card" id="gold">
+
+        {% elseif card.rarity == "silver"  %}
+            <div class="card" id="silver">
+
+        {% else%}
+            <div class="card" id="bronze">
+
+        {% endif %}
+            <div class="cardHeader">
+                <div class="cardMana" style="color:white"> {{ card.mana }} </div>
+                <span> {{ card.name }} </span>
+                <span> ( {{ card.faction.name }} ) </span>
+            </div>
+            <div class="cardImage"  style="background-image: url('/uploads/img/{{card.image}}'); background-size: cover; background-repeat: no-repeat;background-position: center center; "></div>
+            <div class="cardFooter">
+
+                <div class="cardAtk" style="color:white"> {{ card.atk }} </div>
+                <div class="cardHealth" style="color:white">  {{ card.health }} </div>
+            </div>
+        </div>
+                <a href="{{ path("delete_card", { id: card.id}) }}"> Delete</a>
+    {#    <li>Nom:  | HP: {{ card.health }} | ATK: {{ card.atk }} | Cost: {{ card.mana }} | Faction: {{ card.faction.name }} | Creator: {{ card.user.name }} | Image: {{ card.image }}</li>#}
+    {% endfor %}
+</div>

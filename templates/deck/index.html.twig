@@ -1,0 +1,19 @@
+<h1>Decks</h1>
+
+
+    {% if decks is defined %}
+        <div class="example-wrapper zone">
+            {% for deck in decks %}
+                <li>
+                    <a class="link" href="{{ path('get_deck', {id: deck.id}) }}">{{ deck.name }}</a>
+
+                </li>
+
+            {% endfor %}
+        </div>
+
+    {% else %}
+
+        <h2>Vous n'avez pas de Deck veuillez creer un deck </h2>
+
+    {% endif %}
