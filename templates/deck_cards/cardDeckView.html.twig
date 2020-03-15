@@ -15,7 +15,6 @@
 
                 <div class="containerCard">
                 {% for deckcard in deckcards %}
-
                     <a href="{{ path("remove_deckcard", {id: deckcard.id}) }}">
                         {% if deckcard.card.rarity == "legendary"  %}
                             <div  class="card" id="legendary">
@@ -27,14 +26,15 @@
                             <div class="card" id="bronze">
                         {% endif %}
                         <div class="cardHeader">
+
+                            <div class="cardMana" style="color:white"> {{ deckcard.card.mana }} </div>
                             <span> {{ deckcard.card.name }} </span>
                             <span> ( {{ deckcard.card.faction.name }} ) </span>
                         </div>
                         <div class="cardImage"  style="background-image: url('/uploads/img/{{deckcard.card.image}}'); background-size: cover; background-repeat: no-repeat;background-position: center center; "></div>
                         <div class="cardFooter">
-                            <div class="cardMana" style="color:white"> {{ deckcard.card.mana }} </div>
-                            <div class="cardHealth" style="color:white">  {{ deckcard.card.health }} </div>
                             <div class="cardAtk" style="color:white"> {{ deckcard.card.atk }} </div>
+                            <div class="cardHealth" style="color:white">  {{ deckcard.card.health }} </div>
                         </div>
                     </div>
                 </a>
@@ -60,14 +60,16 @@
                         <div class="card" id="bronze">
                     {% endif %}
                         <div class="cardHeader">
+
+                            <div class="cardMana" style="color:white"> {{ card.mana }} </div>
                             <span> {{ card.name }} </span>
                             <span> ( {{ card.faction.name }} ) </span>
                         </div>
                         <div class="cardImage"  style="background-image: url('/uploads/img/{{card.image}}'); background-size: cover; background-repeat: no-repeat;background-position: center center; "></div>
                         <div class="cardFooter">
-                            <div class="cardMana" style="color:white"> {{ card.mana }} </div>
-                            <div class="cardHealth" style="color:white">  {{ card.health }} </div>
+
                             <div class="cardAtk" style="color:white"> {{ card.atk }} </div>
+                            <div class="cardHealth" style="color:white">  {{ card.health }} </div>
                         </div>
                     </div>
                 </a>
