@@ -82,7 +82,11 @@ class DeckCardsController extends AbstractController
         $deck_cards = $repo->findBy(["deck" => $id_deck]);
         $cards = $cardsRepo->findAll();
 
-        return $this->render('deck_cards/cardDeckView.html.twig');
+        return $this->render('deck_cards/cardDeckView.html.twig', [
+            'deck' => $deck,
+            "deckcards" => $deck_cards,
+            "cards" => $cards
+        ]);
 
     }
 

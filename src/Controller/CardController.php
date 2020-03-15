@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CardController extends AbstractController
 {
@@ -26,10 +25,24 @@ class CardController extends AbstractController
 
 
         return $this->render('card/index.html.twig', [
+            'controller_name' => 'CardController',
             'cards' => $cards
         ]);
     }
 
+
+
+    /**
+     * @Route("/card", name="card_show")
+     */
+    public function show(){
+
+        $repo = $this->getDoctrine()->getRepository(Card::class);
+        $cards = $repo->findAll();
+        return $this->render('card/index.html.twig',[
+            'cards' => $cards
+        ]);
+    }
 
 
 
@@ -48,7 +61,10 @@ class CardController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
+            // add creator
             $card->setUser($this->getUser());
+
+            // add Image
 
             $image = $form->get('image')->getData();
             $imageName = 'card-'.uniqid().'.'.$image->guessExtension();
@@ -62,7 +78,7 @@ class CardController extends AbstractController
             $entityManager->persist($card);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Card Add !');
+            $this->addFlash('success', 'Carte ajouté !');
 
             return new Response();
         }
@@ -71,27 +87,6 @@ class CardController extends AbstractController
 
             'form' => $form->createView()
 
-        ]);
-    }
-    /**
-     * @Route("/card/delete/{id}", name="delete_card")
-     * @ParamConverter("card", options={"mapping"={"id"="id"}})
-     * @param int $id_card
-     * @return Response
-     */
-    public function deleteCard(int $id){
-
-        $repo = $this->getDoctrine()->getRepository(Card::class);
-        $card = $repo->find($id);
-        //pour le retour
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($card);
-        $em->flush();
-
-        $this->addFlash('success', 'Card Delete !');
-        $cards = $repo->findAll();
-        return $this->render('card/index.html.twig', [
-            'cards' => $cards
         ]);
     }
 }
